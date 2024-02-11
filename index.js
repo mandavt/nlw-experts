@@ -105,9 +105,12 @@ for (const item of perguntas) {
     quizItem.querySelector('h3').textContent = item.pergunta
 
     for (let resposta of item.respostas) {
+        const id = 'pergunta-' + perguntas.indexOf(item)
         const dt = quizItem.querySelector('dl dt').cloneNode(true)
-        dt.querySelector('span').textContent = resposta
-        dt.querySelector('input').setAttribute('name', 'pergunta-' + perguntas.indexOf(item))
+        dt.querySelector('label').textContent = resposta
+        dt.querySelector('label').setAttribute('for', id)
+        dt.querySelector('input').setAttribute('name', id)
+        dt.querySelector('input').setAttribute('id', id)
         dt.querySelector('input').value = item.respostas.indexOf(resposta)
         dt.querySelector('input').onchange = (event) => {
             const estaCorreta = event.target.value == item.correta
